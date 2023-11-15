@@ -1,0 +1,15 @@
+{
+  "targets": {
+    "livro-de-visita-e1355": {
+      "hosting": {
+        "app": [
+          "livro-de-visita-e1355"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "livro-de-visita-v2",
+    "default-teste": "livro-de-visita-v2"
+  }
+}

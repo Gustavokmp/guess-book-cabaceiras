@@ -1,0 +1,110 @@
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4"> 
+        <img class="img-logo" src="../../assets/cabacityTourLogot2.png" alt="">
+      </ion-col>
+      <ion-col size="8">
+        <ion-row>
+          <div class="div-imgs">
+            <img style="width: 53%;" src="../../assets/unifacisaLogot2.png" alt="">
+            <img style="width: 47%;" src="../../assets/sebraeLogot2.png" alt="">
+          </div>
+       
+        </ion-row>
+        <ion-row>
+          <div class="div-imgs">
+            <img style="width: 20%;"  src="../../assets/brasaocabt2.png" alt="">
+            <img style="width: 80%;" src="../../assets/labelcapt2.png" alt="">
+          </div>
+         
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+  <div id="container">
+
+    <ion-text  class="text-title">
+      <h1>Formulário de visitas</h1>
+    </ion-text>
+    <form role="form" [formGroup]="formGuestBook" (ngSubmit)="onSubmit()">
+
+      <ion-item lines="none" class="item-input">
+        <ion-input  formControlName="name" label="Nome" labelPlacement="floating" ></ion-input>
+      </ion-item>
+
+      <div class="text-error" *ngIf="formGuestBook.get('name')?.hasError('required') && formGuestBook.get('name')?.touched">
+        <ion-text color="danger">Nome obrigatório!</ion-text>
+      </div>
+
+      <ion-item lines="none">
+        <ion-select formControlName="contrie" label="País" label-placement="floating" (ionChange)="selectedContrie()">
+          <ion-select-option *ngFor="let contrie of listCoutries"
+            [value]="contrie.name">{{contrie.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="text-error" *ngIf="formGuestBook.get('contrie')?.hasError('required') && formGuestBook.get('contrie')?.touched">
+        <ion-text color="danger">País obrigatório!</ion-text>
+      </div>
+
+      <ion-item lines="none" *ngIf="this.formGuestBook.value.contrie === 'Brazil'">
+        <ion-select formControlName="state" label="Estado" label-placement="floating" (ionChange)="selectedState()">
+          <ion-select-option *ngFor="let state of listState" [value]="state.nome">{{state.nome}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="text-error" *ngIf="formGuestBook.get('state')?.hasError('required') && formGuestBook.get('state')?.touched">
+        <ion-text color="danger">Estado obrigatório!</ion-text>
+      </div>
+
+      <ion-item lines="none" *ngIf="this.formGuestBook.value.contrie === 'Brazil'">
+        <ion-select formControlName="city" label="Cidade de Origem" label-placement="floating">
+          <ion-select-option *ngFor="let city of listCities" [value]="city">{{city}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="text-error" *ngIf="formGuestBook.get('city')?.hasError('required') && formGuestBook.get('city')?.touched">
+        <ion-text color="danger">Cidade obrigatório!</ion-text>
+      </div>
+
+      <ion-item lines="none">
+        <ion-input  formControlName="email" type="email" label="Email" labelPlacement="floating"
+          ></ion-input>
+      </ion-item>
+
+      <div class="text-error" *ngIf="formGuestBook.get('email')?.hasError('required') && formGuestBook.get('email')?.touched">
+        <ion-text color="danger">Email obrigatório!</ion-text>
+      </div>
+
+      <div class="text-error" *ngIf="formGuestBook.get('email')?.hasError('email') && formGuestBook.get('email')?.touched">
+        <ion-text color="danger">Email inválida!</ion-text>
+      </div>
+
+      <ion-item lines="none">
+        <ion-textarea  formControlName="reasonForTheTrip" label="Motivo da Visita" labelPlacement="floating"
+          ></ion-textarea>
+      </ion-item>
+
+      <div class="text-error" *ngIf="formGuestBook.get('reasonForTheTrip')?.hasError('required') && formGuestBook.get('reasonForTheTrip')?.touched">
+        <ion-text color="danger">Motivo obrigatório!</ion-text>
+      </div>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button  size="large"color="medium" class="btn-submit" type="button" expand="block" (click)="goBack()">Voltar</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button  size="large"class="btn-submit" expand="block" type="submit" [disabled]="formGuestBook.invalid">Enviar</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+     
+    </form>
+  </div>
+
+</ion-content>

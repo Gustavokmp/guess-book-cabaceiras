@@ -1,0 +1,7 @@
+{
+  "name": "guestBook",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

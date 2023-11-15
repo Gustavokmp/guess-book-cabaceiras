@@ -1,0 +1,38 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4"> 
+        <img class="img-logo" src="../../assets/cabacityTourLogot2.png" alt="">
+      </ion-col>
+      <ion-col size="8">
+        <ion-row>
+          <div class="div-imgs">
+            <img style="width: 53%;" src="../../assets/unifacisaLogot2.png" alt="">
+            <img style="width: 47%;" src="../../assets/sebraeLogot2.png" alt="">
+          </div>
+       
+        </ion-row>
+        <ion-row>
+          <div class="div-imgs">
+            <img style="width: 20%;"  src="../../assets/brasaocabt2.png" alt="">
+            <img style="width: 80%;" src="../../assets/labelcapt2.png" alt="">
+          </div>
+         
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div id="container">
+    <ion-text  class="text-title">
+      <h1>Selecione o local visitado</h1>
+    </ion-text>
+    <ion-card *ngFor="let item of listOfTouristAttractions" (click)="goGuestBook(item)">
+      <img class="card-img" [src]="getImage(item.foto)" />
+      <ion-card-header>
+        <ion-card-subtitle>{{item.nome}}</ion-card-subtitle>
+      </ion-card-header> 
+    </ion-card>
+    
+  </div>
+</ion-content>
