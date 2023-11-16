@@ -69,6 +69,8 @@ export class GuestBookPage implements OnInit {
       this.presentToast();
       this.goBack();
     }).catch((err) => {
+      this.loadingCtrl.dismiss();
+      this.presentToastError();
       console.log(err);
     })
   }
@@ -114,6 +116,16 @@ export class GuestBookPage implements OnInit {
       duration: 3000,
       position: 'middle',
       cssClass: 'custom-toast'
+    });
+
+    await toast.present();
+  }
+
+  async presentToastError() {
+    const toast = await this.toastController.create({
+      message: this.getTranslateText('toast-text-error'),
+      duration: 3000,
+      position: 'middle',
     });
 
     await toast.present();

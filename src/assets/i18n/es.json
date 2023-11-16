@@ -20,5 +20,6 @@
     "btn-save" : "Mandar",
     "language-en":"Inglés",
     "language-es":"Español",
-    "language-pt-br":"Portugués"
+    "language-pt-br":"Portugués",
+    "toast-text-error":"No pudimos registrar su visita. Por favor, inténtelo de nuevo más tarde."
 }

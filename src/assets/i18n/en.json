@@ -20,5 +20,6 @@
     "btn-save" : "Send",
     "language-en":"English",
     "language-es":"Spanish",
-    "language-pt-br":"Portuguese"
+    "language-pt-br":"Portuguese",
+    "toast-text-error":"We were unable to register your visit. please try again later."
 }
