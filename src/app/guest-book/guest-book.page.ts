@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BRAZIL_STATES_AND_CITIES, CONTRIES } from '../info';
+import { Brasil_STATES_AND_CITIES, CONTRIES } from '../info';
 import { Router } from '@angular/router';
 import { Firestore, collection, collectionData, addDoc } from '@angular/fire/firestore';
 import { LoadingController, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-guest-book',
@@ -16,7 +17,7 @@ export class GuestBookPage implements OnInit {
 
   listCoutries = CONTRIES;
 
-  listState = BRAZIL_STATES_AND_CITIES.estados;
+  listState = Brasil_STATES_AND_CITIES.estados;
   listCities: Array<any> = [];
 
   constructor(
@@ -24,7 +25,8 @@ export class GuestBookPage implements OnInit {
     private router: Router,
     private fs: Firestore,
     private loadingCtrl: LoadingController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private translate: TranslateService
   ) {
     this.createForm();
   }
@@ -40,27 +42,27 @@ export class GuestBookPage implements OnInit {
     if (!touristAttractionSelected) {
       this.goBack();
     }
-    this.formGuestBook.get('touristAttraction')?.setValue(touristAttractionSelected.nome);
+    this.formGuestBook.get('pontoTuristico')?.setValue(touristAttractionSelected.nome);
   }
 
   createForm() {
     this.formGuestBook = this.fb.group({
-      name: ['', [Validators.required]],
-      contrie: ['Brazil', [Validators.required]],
-      state: ['', [Validators.required]],
-      city: ['', [Validators.required]],
+      nomeDoVisitante: ['', [Validators.required]],
+      pais: ['Brasil', [Validators.required]],
+      estado: ['', [Validators.required]],
+      cidade: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      reasonForTheTrip: ['', [Validators.required]],
-      touristAttraction: ['', []],
-      date: ['', []]
+      motivoDaViagem: ['', [Validators.required]],
+      pontoTuristico: ['', []],
+      data: ['', []]
 
     });
-    this.formGuestBook.get('city')?.disable();
+    this.formGuestBook.get('cidade')?.disable();
   }
 
   onSubmit() {
     this.showLoading();
-    this.formGuestBook.get('date')?.setValue(new Date().toLocaleString());
+    this.formGuestBook.get('data')?.setValue(new Date().toLocaleString());
     const collectionInstance = collection(this.fs, 'visitas');
     addDoc(collectionInstance, this.formGuestBook.value).then(() => {
       this.loadingCtrl.dismiss();
@@ -72,24 +74,24 @@ export class GuestBookPage implements OnInit {
   }
 
   selectedContrie() {
-    if (this.formGuestBook.get('contrie')?.valid) {
-      if (this.formGuestBook.value.contrie == "Brazil") {
-        this.formGuestBook.get('state')?.enable();
+    if (this.formGuestBook.get('pais')?.valid) {
+      if (this.formGuestBook.value.pais == "Brasil") {
+        this.formGuestBook.get('estado')?.enable();
       } else {
-        this.formGuestBook.get('state')?.reset();
-        this.formGuestBook.get('city')?.reset();
-        this.formGuestBook.get('state')?.disable();
-        this.formGuestBook.get('city')?.disable();
+        this.formGuestBook.get('estado')?.reset();
+        this.formGuestBook.get('cidade')?.reset();
+        this.formGuestBook.get('estado')?.disable();
+        this.formGuestBook.get('cidade')?.disable();
 
       }
     }
   }
 
   selectedState() {
-    this.formGuestBook.get('city')?.reset();
-    this.formGuestBook.get('city')?.enable();
-    if (this.formGuestBook.get('state')?.valid) {
-      this.listCities = this.listState.filter((state) => state.nome == this.formGuestBook.get('state')?.value)[0].cidades;
+    this.formGuestBook.get('cidade')?.reset();
+    this.formGuestBook.get('cidade')?.enable();
+    if (this.formGuestBook.get('estado')?.valid) {
+      this.listCities = this.listState.filter((state) => state.nome == this.formGuestBook.get('estado')?.value)[0].cidades;
     }
 
   }
@@ -100,7 +102,7 @@ export class GuestBookPage implements OnInit {
 
   async showLoading() {
     const loading = await this.loadingCtrl.create({
-      message: 'Salvando por favor aguarde!',
+      message: this.getTranslateText('loading-text'),
     });
 
     loading.present();
@@ -108,13 +110,17 @@ export class GuestBookPage implements OnInit {
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Visita registrada!',
+      message: this.getTranslateText('toast-text'),
       duration: 3000,
       position: 'middle',
-      cssClass:'custom-toast'
+      cssClass: 'custom-toast'
     });
 
     await toast.present();
+  }
+
+  getTranslateText(text: string) {
+    return this.translate.instant(text);
   }
 
 }

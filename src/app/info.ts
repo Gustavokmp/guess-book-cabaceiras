@@ -29,7 +29,7 @@ export const CONTRIES = [
   {name: 'Bosnia and Herzegovina', code: 'BA'}, 
   {name: 'Botswana', code: 'BW'}, 
   {name: 'Bouvet Island', code: 'BV'}, 
-  {name: 'Brazil', code: 'BR'}, 
+  {name: 'Brasil', code: 'BR'}, 
   {name: 'British Indian Ocean Territory', code: 'IO'}, 
   {name: 'Brunei Darussalam', code: 'BN'}, 
   {name: 'Bulgaria', code: 'BG'}, 
@@ -245,7 +245,7 @@ export const CONTRIES = [
 ]
 
 
-export const BRAZIL_STATES_AND_CITIES = {
+export const Brasil_STATES_AND_CITIES = {
     estados: [
       {
         sigla: "AC",

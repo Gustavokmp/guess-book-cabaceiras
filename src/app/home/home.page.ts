@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DATABASE_CABACEIRAS } from '../info';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ export class HomePage {
 
   listOfTouristAttractions: Array<any> = [];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private translate: TranslateService) { }
 
   ionViewWillEnter(): void {
     localStorage.removeItem('attraction');

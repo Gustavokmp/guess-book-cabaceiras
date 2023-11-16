@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { GuestBookPageRoutingModule } from './guest-book-routing.module';
 
 import { GuestBookPage } from './guest-book.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { GuestBookPage } from './guest-book.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    GuestBookPageRoutingModule
+    GuestBookPageRoutingModule,
+    TranslateModule
   ],
   declarations: [GuestBookPage]
 })
