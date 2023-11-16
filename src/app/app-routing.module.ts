@@ -19,6 +19,7 @@ const routes: Routes = [
     path: 'frame-image',
     loadChildren: () => import('./frame-image/frame-image.module').then( m => m.FrameImagePageModule)
   },
+  {path: '**', redirectTo: '/home'}
 ];
 
 @NgModule({
